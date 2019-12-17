@@ -6,3 +6,7 @@
 .navBar {
   margin: 5px;
 }
+
+.navBarInline {
+  display: inline;
+}

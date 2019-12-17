@@ -1,6 +1,6 @@
 # [Pursuit-Core-Web-React-Routing-Lab](https://github.com/joinpursuit/Pursuit-Core-Web-React-Routing-Lab)
 
-## Fetching Cats and Dogs
+# Fetching Cats and Dogs
 
 We've already used the [Dog API](https://dog.ceo/dog-api/) to get the image of a single, completely random dog. However, today we're doing something a little different. Today, we are creating a full-fledged app to fulfill all of your pet-image-searching desires: both cats and dogs.
 
