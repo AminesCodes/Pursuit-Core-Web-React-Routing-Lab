@@ -1,71 +1,59 @@
 import React from "react";
-import {Link} from 'react-router-dom',
-import "../Spinner.css";
+import axios from "axios";
+import { Link, Route } from "react-router-dom";
+
+import DogsContainer from "./DogsContainer";
 
 export default class Dogs extends React.PureComponent {
   state = {
-    targetBreed: "",
-    targetSubBreed: "",
-    subBreeds: [],
-    numOfDogs: "1"
+    breedList: null,
+    targetBreed: "random",
+    numOfDogs: "1",
+    reload: true
   };
 
+  async componentDidMount() {
+    try {
+      const { data } = await axios.get("https://dog.ceo/api/breeds/list/all");
+      this.setState({ breedList: data.message });
+    } catch (err) {
+      console.log("Sorry, something went wrong", err);
+    }
+  }
+
   rendreDogsList = () => {
-    const dogsList = Object.keys(this.props.breedList).map(breed => (
+    const dogsList = Object.keys(this.state.breedList).map(breed => (
       <option value={breed}>{breed}</option>
     ));
     if (dogsList.length) {
-      dogsList.unshift(<option value="" />);
+      dogsList.unshift(<option value="random">--Select a Breed--</option>);
       return dogsList;
     }
     return null;
   };
 
   handleBreadSelection = event => {
-    const { breedList } = this.props;
     const targetBreed = event.target.value;
     this.setState({
-      targetBreed: targetBreed,
-      subBreeds: breedList[targetBreed]
+      targetBreed: targetBreed
     });
-    console.log(this.state.subBreeds);
-  };
-
-  rendreSubBreeds = () => {
-    const { subBreeds } = this.state;
-
-    if (subBreeds.length) {
-      const subBreedList = subBreeds.map(subBreed => (
-        <option value={subBreed}>{subBreed}</option>
-      ));
-      subBreedList.unshift(<option value="" />);
-      return (
-        <select
-          value={this.state.targetSubBreed}
-          onChange={this.handleSubBreadSelection}
-        >
-          {subBreedList}
-        </select>
-      );
-    }
-    return null;
-  };
-
-  handleSubBreadSelection = event => {
-    this.setState({ targetSubBreed: event.target.value });
   };
 
   handleNumOfDogsSelection = event => {
     this.setState({ numOfDogs: event.target.value });
   };
 
-  handleLoadDogs = () => {
+  forceReload = () => {
+    this.setState({ reload: !this.state.reload });
+  };
 
-  }
-
+  // ################### RENDER #################
   render() {
     let breedForm = <div className="loader" />;
-    const dogsList = this.rendreDogsList();
+    let dogsList = null;
+    if (this.state.breedList) {
+      dogsList = this.rendreDogsList();
+    }
     if (dogsList) {
       const numberOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(num => (
         <option value={num}>{num}</option>
@@ -88,13 +76,21 @@ export default class Dogs extends React.PureComponent {
       );
     }
 
-    const subBreedList = this.rendreSubBreeds();
+    let link = "/dog";
+    // if (this.state.targetBreed) {
+    link += `/${this.state.targetBreed}`;
+    // }
+    // if (this.state.numOfDogs !== "1") {
+    link += `/${this.state.numOfDogs}`;
+    // }
 
     return (
       <div className="DogsForm">
         {breedForm}
-        {subBreedList}
-        <button onClick={this.handleLoadDogs}>Load</button>
+        <Link className="LinkBtn" to={`${link}`} onClick={this.forceReload}>
+          Load
+        </Link>
+        <Route path="/dog/:breed/:num" component={DogsContainer} />
       </div>
     );
   }
