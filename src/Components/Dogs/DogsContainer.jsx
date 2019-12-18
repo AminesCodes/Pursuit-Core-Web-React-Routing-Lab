@@ -5,7 +5,8 @@ import DogImage from "./DogImage";
 
 export default class Dogs extends React.PureComponent {
   state = {
-    urlList: []
+    urlList: [],
+    reload: this.props.reload
   };
 
   async componentDidMount() {
@@ -19,11 +20,16 @@ export default class Dogs extends React.PureComponent {
 
   componentDidUpdate() {
     const { breed, num } = this.props.match.params;
-    const { targetBreed, numOfDogs } = this.state;
-    if (breed !== targetBreed || num !== numOfDogs) {
+    const { targetBreed, numOfDogs, reload } = this.state;
+    if (
+      breed !== targetBreed ||
+      num !== numOfDogs ||
+      this.props.reload !== reload
+    ) {
       this.setState({
         targetBreed: breed,
-        numOfDogs: num
+        numOfDogs: num,
+        reload: this.props.reload
       });
       this.fetchImage();
     }

@@ -90,7 +90,12 @@ export default class Dogs extends React.PureComponent {
         <Link className="LinkBtn" to={`${link}`} onClick={this.forceReload}>
           Load
         </Link>
-        <Route path="/dog/:breed/:num" component={DogsContainer} />
+        <Route
+          path="/dog/:breed/:num"
+          render={props => (
+            <DogsContainer reload={this.state.reload} {...props} />
+          )}
+        />
       </div>
     );
   }
