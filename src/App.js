@@ -7,7 +7,7 @@ import "./styles.css";
 import Home from "./Components/Home";
 import CatsForm from "./Components/Cats/CatsForm";
 import DogsForm from "./Components/Dogs/DogsForm";
-import DogsCats from "./Components/All";
+import DogsCats from "./Components/All/AllForm";
 
 function App() {
   return (

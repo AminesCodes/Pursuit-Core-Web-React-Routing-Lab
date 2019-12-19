@@ -47,7 +47,7 @@ export default class Cats extends React.PureComponent {
           Load
         </Link>
         <Route
-          path="/cat/:num"
+          path="/cat/:catNum"
           render={props => (
             <CatsContainer reload={this.state.reload} {...props} />
           )}

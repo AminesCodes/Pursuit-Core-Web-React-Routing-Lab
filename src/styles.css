@@ -14,9 +14,12 @@
   display: inline;
 }
 
+.LinkBtn {
+}
+
 .dogImage,
 .catImage {
-  width: 300px;
+  width: 70%;
   display: block;
   margin: 0 auto;
 }
@@ -26,6 +29,18 @@
 
 .sideNavBarLink {
   display: block;
+}
+
+.CatsAndDogs {
+  display: flex;
+}
+
+.CatContainerLeft {
+  width: 40%;
+}
+
+.CatContainerRight {
+  width: 40%;
 }
 
 .loader {

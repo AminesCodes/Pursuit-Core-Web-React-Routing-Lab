@@ -4,23 +4,24 @@ import axios from "axios";
 export default class Cats extends React.PureComponent {
   state = {
     urlList: [],
+    numOfCats: this.props.match.params.catNum,
     reload: this.props.reload
   };
 
-  async componentDidMount() {
-    const { num } = this.props.match.params;
+  componentDidMount() {
+    const { catNum } = this.props.match.params;
     this.setState({
-      numOfCats: num
+      numOfCats: catNum
     });
     this.fetchImage();
   }
 
   componentDidUpdate() {
-    const { num } = this.props.match.params;
+    const { catNum } = this.props.match.params;
     const { numOfCats, reload } = this.state;
-    if (num !== numOfCats || this.props.reload !== reload) {
+    if (catNum !== numOfCats || this.props.reload !== reload) {
       this.setState({
-        numOfCats: num,
+        numOfCats: catNum,
         reload: this.props.reload
       });
       this.fetchImage();
@@ -28,13 +29,12 @@ export default class Cats extends React.PureComponent {
   }
 
   fetchImage = async () => {
-    const { num } = this.props.match.params;
+    const { catNum } = this.props.match.params;
 
-    let fetchURL = `https://api.thecatapi.com/v1/images/search?limit=${num}`;
+    let fetchURL = `https://api.thecatapi.com/v1/images/search?limit=${catNum}`;
 
     try {
       const { data } = await axios.get(fetchURL);
-      console.log(data);
       this.setState({ urlList: data });
     } catch (err) {
       console.log("Sorry, something went wrong", err);
