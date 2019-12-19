@@ -8,11 +8,11 @@ const Home = () => {
       <p>
         This web app will generate a random picture of a cat if you go to{" "}
         <nav className="navBarInline">
-          <Link to="/cats">Cats</Link>
+          <Link to="/cat">Cats</Link>
         </nav>{" "}
         or a random piture of a dog if you go to{" "}
         <nav className="navBarInline">
-          <Link to="/dogs">Dogs</Link>
+          <Link to="/dog">Dogs</Link>
         </nav>
       </p>
       <p>

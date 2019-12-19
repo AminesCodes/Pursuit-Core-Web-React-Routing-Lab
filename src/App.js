@@ -5,7 +5,7 @@ import { Link, Route, Switch } from "react-router-dom";
 import "./styles.css";
 
 import Home from "./Components/Home";
-import Cats from "./Components/Cats/Cats";
+import CatsForm from "./Components/Cats/CatsForm";
 import DogsForm from "./Components/Dogs/DogsForm";
 import DogsCats from "./Components/All";
 
@@ -30,7 +30,7 @@ function App() {
 
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/cat" component={Cats} />
+          <Route path="/cat" component={CatsForm} />
           <Route path="/dog" component={DogsForm} />
           <Route path="/all" component={DogsCats} />
         </Switch>

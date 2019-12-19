@@ -23,7 +23,9 @@ export default class Dogs extends React.PureComponent {
 
   rendreDogsList = () => {
     const dogsList = Object.keys(this.state.breedList).map(breed => (
-      <option value={breed}>{breed}</option>
+      <option key={breed} value={breed}>
+        {breed}
+      </option>
     ));
     if (dogsList.length) {
       dogsList.unshift(<option value="random">--Select a Breed--</option>);
@@ -43,7 +45,7 @@ export default class Dogs extends React.PureComponent {
     this.setState({ numOfDogs: event.target.value });
   };
 
-  forceReload = () => {
+  reloadImages = () => {
     this.setState({ reload: !this.state.reload });
   };
 
@@ -56,7 +58,9 @@ export default class Dogs extends React.PureComponent {
     }
     if (dogsList) {
       const numberOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(num => (
-        <option value={num}>{num}</option>
+        <option key={num} value={num}>
+          {num}
+        </option>
       ));
       breedForm = (
         <>
@@ -76,18 +80,12 @@ export default class Dogs extends React.PureComponent {
       );
     }
 
-    let link = "/dog";
-    // if (this.state.targetBreed) {
-    link += `/${this.state.targetBreed}`;
-    // }
-    // if (this.state.numOfDogs !== "1") {
-    link += `/${this.state.numOfDogs}`;
-    // }
+    const link = `/dog/${this.state.targetBreed}/${this.state.numOfDogs}`;
 
     return (
       <div className="DogsForm">
         {breedForm}
-        <Link className="LinkBtn" to={`${link}`} onClick={this.forceReload}>
+        <Link className="LinkBtn" to={`${link}`} onClick={this.reloadImages}>
           Load
         </Link>
         <Route

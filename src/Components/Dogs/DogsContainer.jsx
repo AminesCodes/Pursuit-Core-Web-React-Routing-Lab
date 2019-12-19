@@ -1,8 +1,6 @@
 import React from "react";
 import axios from "axios";
 
-import DogImage from "./DogImage";
-
 export default class Dogs extends React.PureComponent {
   state = {
     urlList: [],
@@ -57,7 +55,7 @@ export default class Dogs extends React.PureComponent {
 
     if (this.state.urlList.length) {
       dogContainer = this.state.urlList.map(url => (
-        <DogImage key={url} imageUrl={url} />
+        <img className="dogImage" key={url} src={url} alt="Dog" />
       ));
     }
 

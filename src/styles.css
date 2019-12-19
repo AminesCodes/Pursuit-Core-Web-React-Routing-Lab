@@ -14,7 +14,8 @@
   display: inline;
 }
 
-.dogImage {
+.dogImage,
+.catImage {
   width: 300px;
   display: block;
   margin: 0 auto;
